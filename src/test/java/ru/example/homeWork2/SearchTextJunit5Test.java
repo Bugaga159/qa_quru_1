@@ -18,7 +18,7 @@ public class SearchTextJunit5Test {
 	}
 
 	@Test
-	public void shouldSeeFullOfForm() {
+	public void shouldBeTextJunit5() {
 		open("/selenide/selenide");
 		$x("//*[@data-content='Wiki']").click();
 		SelenideElement softAssertions= $(byText("SoftAssertions"));
