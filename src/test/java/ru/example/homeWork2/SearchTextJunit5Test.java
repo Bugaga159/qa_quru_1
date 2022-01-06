@@ -21,10 +21,8 @@ public class SearchTextJunit5Test {
 	public void shouldBeTextJunit5() {
 		open("/selenide/selenide");
 		$x("//*[@data-content='Wiki']").click();
-		SelenideElement softAssertions= $(byText("SoftAssertions"));
 		$(".wiki-more-pages-link button").click();
-		softAssertions.shouldBe(visible);
-		softAssertions.click();
+		$(byText("SoftAssertions")).click();
 		$$(".markdown-body li").filterBy(text("Using JUnit5 extend test class:"))
 				.first().shouldBe(visible);
 	}
