@@ -3,10 +3,12 @@ package ru.example.homeWork1.pages;
 import com.codeborne.selenide.SelenideElement;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class PageFormStudents {
 	private SelenideElement firstName = $("#firstName");
@@ -47,11 +49,13 @@ public class PageFormStudents {
 		return this;
 	}
 
-	public PageFormStudents setBirthDay() {
+	public PageFormStudents setBirthDay(String date) {
+		String[] dateBirthday = date.split(" ");
 		$("#dateOfBirthInput").click();
-		$(".react-datepicker__month-select").selectOption("May");
-		$(".react-datepicker__year-select").selectOption("1993");
-		$(".react-datepicker__day--001").click();
+		$(".react-datepicker__month-select").selectOption(dateBirthday[1]);
+		$(".react-datepicker__year-select").selectOption(dateBirthday[2]);
+		$x("//div[contains(@class,'react-datepicker__day--0" + dateBirthday[0]
+				+"')][contains(@class,'weekend')]").click();
 		return this;
 	}
 
@@ -91,8 +95,11 @@ public class PageFormStudents {
 		return this;
 	}
 
-	public PageFormStudents assertSuccessfulList(ArrayList<String> list) {
-		list.forEach(el -> this.successfulList.shouldHave(text(el)));
+	public PageFormStudents assertSuccessfulList(HashMap<String, String> map) {
+		map.forEach((k, v) -> {
+			$x("//td[text()='" + k + "']/following-sibling::td")
+					.shouldHave(text(v));
+		});
 		return this;
 	}
 }
