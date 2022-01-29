@@ -1,6 +1,8 @@
 package ru.example.homeWork1.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,31 +26,37 @@ public class PageFormStudents {
 	private SelenideElement successfulText = $("#example-modal-sizes-title-lg");
 	private SelenideElement successfulList = $(".table-responsive");
 
+	@Step("Input firstName - {firstName}")
 	public PageFormStudents setFirstName(String firstName) {
 		this.firstName.setValue(firstName);
 		return this;
 	}
 
+	@Step("Input lastName - {lastName}")
 	public PageFormStudents setLastName(String lastName) {
 		this.lastName.setValue(lastName);
 		return this;
 	}
 
+	@Step("Input userEmail - {userEmail}")
 	public PageFormStudents setUserEmail(String userEmail) {
 		this.userEmail.setValue(userEmail);
 		return this;
 	}
 
+	@Step("Input userNumber - {userNumber}")
 	public PageFormStudents setUserNumber(String userNumber) {
 		this.userNumber.setValue(userNumber);
 		return this;
 	}
 
+	@Step("Select userNumber - {gender}")
 	public PageFormStudents setGender(String gender) {
 		this.gender.$(byText(gender)).click();
 		return this;
 	}
 
+	@Step("Select BirthDay - {date}")
 	public PageFormStudents setBirthDay(String date) {
 		String[] dateBirthday = date.split(" ");
 		$("#dateOfBirthInput").click();
@@ -59,42 +67,50 @@ public class PageFormStudents {
 		return this;
 	}
 
+	@Step("Input subjects - {subjectsInput}")
 	public PageFormStudents setSubject(String subjectsInput) {
 		this.subjectsInput.setValue(subjectsInput).pressEnter();
 		return this;
 	}
 
+	@Step("Choice hobbies - {hobbies}")
 	public PageFormStudents setHobbies(String hobbies) {
 		this.hobbies.$(byText(hobbies)).click();
 		return this;
 	}
 
+	@Step("add image - {path}")
 	public PageFormStudents setUploadPicture(String path) {
 		this.uploadPicture.uploadFile(new File(path));
 		return this;
 	}
 
+	@Step("add address - {address}")
 	public PageFormStudents setAddress(String address) {
 		this.address.setValue(address);
 		return this;
 	}
 
+	@Step("choice state - {address} and city - {city}")
 	public PageFormStudents setStateAndCity(String state, String city) {
 		$("#react-select-3-input").setValue(state).pressEnter();
 		$("#react-select-4-input").setValue(city).pressEnter();
 		return this;
 	}
 
+	@Step("click Submit")
 	public PageFormStudents clickSubmit() {
 		this.submit.scrollTo().click();
 		return this;
 	}
 
+	@Step("Assert title - {successfulText}")
 	public PageFormStudents assertSuccessfulText(String successfulText) {
 		this.successfulText.shouldHave(text(successfulText));
 		return this;
 	}
 
+	@Step("Validation of entered data")
 	public PageFormStudents assertSuccessfulList(HashMap<String, String> map) {
 		map.forEach((k, v) -> {
 			$x("//td[text()='" + k + "']/following-sibling::td")
