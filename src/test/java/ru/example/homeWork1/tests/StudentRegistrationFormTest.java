@@ -21,7 +21,7 @@ public class StudentRegistrationFormTest extends BaseTest {
 			.dateOfBirth("01 May 1993")
 			.subjects("Science")
 			.hobbies("Reading")
-			.pathImage(PATH_TO_FILE)
+//			.pathImage(PATH_TO_FILE)
 			.address(faker.address().streetAddress())
 			.state("Haryana")
 			.city("Panipat").build();
@@ -35,7 +35,7 @@ public class StudentRegistrationFormTest extends BaseTest {
 			.setBirthDay(student.getDateOfBirth())
 			.setSubject(student.getSubjects())
 			.setHobbies(student.getHobbies())
-			.setUploadPicture(student.getPathImage())
+//			.setUploadPicture(student.getPathImage())
 			.setAddress(student.getAddress())
 			.setStateAndCity(student.getState(), student.getCity())
 			.clickSubmit()
