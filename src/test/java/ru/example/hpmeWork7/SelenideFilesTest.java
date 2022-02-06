@@ -3,7 +3,6 @@ package ru.example.hpmeWork7;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Test;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -18,8 +17,7 @@ public class SelenideFilesTest {
 		File file = $("#raw-url").download();
 		try(InputStream is = new FileInputStream(file)) {
 			assertThat(new String(is.readAllBytes(), StandardCharsets.UTF_8))
-					.contains("Eclipse Public License");
-
+				.contains("Eclipse Public License");
 		}
 	}
 
