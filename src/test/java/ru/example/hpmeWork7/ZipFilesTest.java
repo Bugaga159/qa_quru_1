@@ -23,17 +23,17 @@ public class ZipFilesTest {
 			CSVReader reader = new CSVReader(new InputStreamReader(csvStream));
 			List<String[]> list = reader.readAll();
 			assertThat(list).hasSize(3).contains(
-					new String[] {"Author", "Book"},
-					new String[] {"Block", "Apteka"},
-					new String[] {"Esenin", "Cherniy Chelovek"});
+				new String[] {"Author", "Book"},
+				new String[] {"Block", "Apteka"},
+				new String[] {"Esenin", "Cherniy Chelovek"});
 		}
 
 		ZipEntry XlsEntry = zip.getEntry("test.xlsx");
 		try(InputStream xlsStream = zip.getInputStream(XlsEntry)) {
 			XLS parsed = new XLS(xlsStream);
 			assertThat(parsed.excel.getSheetAt(0)
-					.getRow(1).getCell(1).getStringCellValue())
-					.isEqualTo("test");
+				.getRow(1).getCell(1).getStringCellValue())
+				.isEqualTo("test");
 		}
 
 		ZipEntry PdfEntry = zip.getEntry("junit.pdf");

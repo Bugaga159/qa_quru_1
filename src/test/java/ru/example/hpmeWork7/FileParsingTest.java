@@ -5,7 +5,6 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.xlstest.XLS;
 import com.opencsv.CSVReader;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -34,8 +33,8 @@ public class FileParsingTest {
         try (InputStream stream = cl.getResourceAsStream("test.xlsx")) {
             XLS parsed = new XLS(stream);
             assertThat(parsed.excel.getSheet("Sheet1")
-					.getRow(0).getCell(0).getStringCellValue())
-                    .isEqualTo("test");
+				.getRow(0).getCell(0).getStringCellValue())
+				.isEqualTo("test");
         }
     }
 
@@ -45,18 +44,17 @@ public class FileParsingTest {
 			CSVReader reader = new CSVReader(new InputStreamReader(stream));
 			List<String[]> list = reader.readAll();
 			assertThat(list)
-					.hasSize(3)
-					.contains(
-							new String[] {"Author", "Book"},
-							new String[] {"Block", "Apteka"},
-							new String[] {"Esenin", "Cherniy Chelovek"}
-					);
+				.hasSize(3)
+				.contains(
+					new String[] {"Author", "Book"},
+					new String[] {"Block", "Apteka"},
+					new String[] {"Esenin", "Cherniy Chelovek"}
+				);
 		}
 	}
 
 	@Test
 	void zipTest() throws Exception {
-		//sample-zip-file.zip
 		try (InputStream stream = cl.getResourceAsStream("archive.zip");
 			 ZipInputStream zis = new ZipInputStream(stream)) {
 			ZipEntry zipEntry;
